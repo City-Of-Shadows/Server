@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({origin: "https://city-of-shadows.github.io", credentials: true,}));
 app.use(express.json());
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -19,8 +21,6 @@ app.get("/", (req, res) => {
 res.json({
     success: true,
     message:"Game backend is running!",});});
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
 app.listen(PORT, () => {
 console.log(`🚀 Backend running on http://localhost:${PORT}`);
 console.log(`🔌 Socket.IO running on http://localhost:${PORT}`);});
